@@ -1,0 +1,72 @@
+buildscript {
+    ext {
+        springBootVersion = "3.3.1"
+        rsqlJpaSpecificationVersion = "6.0.21"
+        rsqlQuerydslSpringBootStarterVersion = "6.0.21"
+        queryDslVersion = "5.1.0"
+        jakartaPersistenceApiVersion = "3.2.0"
+        mysqlConnectorVersion = "8.4.0"
+        junitJupiterVersion = "1.19.8"
+        testcontainerMysqlVersion = "1.19.8"
+    }
+}
+
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.1'
+	id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// RSQL
+    implementation("io.github.perplexhub:rsql-jpa-specification:${rsqlJpaSpecificationVersion}")
+    implementation("io.github.perplexhub:rsql-querydsl-spring-boot-starter:${rsqlQuerydslSpringBootStarterVersion}")
+    implementation("com.querydsl:querydsl-core:${queryDslVersion}")
+    implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
+
+    testAnnotationProcessor(
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta",
+            "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}",
+    )
+
+    // RSQL
+    implementation("io.github.perplexhub:rsql-jpa-specification:${rsqlJpaSpecificationVersion}")
+    implementation("io.github.perplexhub:rsql-querydsl-spring-boot-starter:${rsqlQuerydslSpringBootStarterVersion}")
+    implementation("com.querydsl:querydsl-core:${queryDslVersion}")
+    implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
+
+    testAnnotationProcessor(
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta",
+            "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}",
+    )
+
+    // test container
+    testImplementation("com.mysql:mysql-connector-j:${mysqlConnectorVersion}")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers:${springBootVersion}")
+    testImplementation("org.testcontainers:junit-jupiter:${junitJupiterVersion}")
+    testImplementation("org.testcontainers:mysql:${testcontainerMysqlVersion}")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
