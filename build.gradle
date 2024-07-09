@@ -43,10 +43,9 @@ dependencies {
     implementation("io.github.perplexhub:rsql-querydsl-spring-boot-starter:${rsqlQuerydslSpringBootStarterVersion}")
     implementation("com.querydsl:querydsl-core:${queryDslVersion}")
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
-
-    testAnnotationProcessor(
+    annotationProcessor(
             "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta",
-            "jakarta.persistence:jakarta.persistence-api:${jakartaPersistenceApiVersion}",
+            "jakarta.persistence:jakarta.persistence-api:",
     )
 
     // RSQL
