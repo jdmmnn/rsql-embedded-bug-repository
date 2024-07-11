@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.example.demo.entity.AccountEntity;
 import com.example.demo.entity.AddressEntity;
 import com.example.demo.entity.AddressHistoryEntity;
@@ -81,7 +79,7 @@ class RSQLMappingTest {
     }
 
     @Test
-    void testSearchInListWhichContainEmbeddedClassWithRSQLMapping() {
+    void testSearchWithReducedPathUsingRSQLMapping() {
         // Given
         RSQLCommonSupport.addMapping(AccountEntity.class, "invoiceAddress", "addressHistory.invoiceAddress");
 
